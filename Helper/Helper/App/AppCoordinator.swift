@@ -7,6 +7,6 @@
 
 import UIKit
 
-final class AppCoordinator: UIViewController {
+final class AppCoordinator {
     
 }
