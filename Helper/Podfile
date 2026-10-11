@@ -1,9 +1,7 @@
 platform :ios, '17.0'
 
 target 'Helper' do
-  # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
-  # Pods for Helper
+pod 'SnapKit', '~> 5.6'
 
 end
