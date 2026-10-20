@@ -11,12 +11,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    var serviceFactory: (any ServiceFactoryProtocol)?
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
+        
+        serviceFactory = ServiceFactory()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = ViewController()
