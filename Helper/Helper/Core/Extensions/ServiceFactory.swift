@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol ServiceFactoryProtocol {
-    var networkService: NetworkServiceProtocol { get }
-    var locationService: LocationServiceProtocol { get }
-}
-
 final class ServiceFactory: ServiceFactoryProtocol {
     let networkService: NetworkServiceProtocol = NetworkService()
     let locationService: LocationServiceProtocol = LocationService()
