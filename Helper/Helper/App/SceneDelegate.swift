@@ -19,6 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         
         let serviceFactory: ServiceFactoryProtocol = ServiceFactory()
+        let modulesFactory = ModulesFactory(serviceFactory: serviceFactory)
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = ViewController()
