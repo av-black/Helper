@@ -20,9 +20,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let serviceFactory: ServiceFactoryProtocol = ServiceFactory()
         let modulesFactory = ModulesFactory(serviceFactory: serviceFactory)
+        let tabBarController = UITabBarController()
+        let appCoordinator = AppCoordinator(
+            tabBarController: tabBarController,
+            modulesFactory: modulesFactory
+        )
+        
+        appCoordinator.start()
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = ViewController()
+        window.rootViewController = tabBarController
         window.makeKeyAndVisible()
         
         self.window = window
