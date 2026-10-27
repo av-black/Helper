@@ -15,18 +15,22 @@ final class ModulesFactory {
     }
     
     func makeMapViewController() -> UIViewController {
-        return MapViewController()
+        let viewModel = MapViewModel()
+        return MapViewController(mapViewModel: viewModel)
     }
     
     func makeNewsViewController() -> UIViewController {
-        return NewsViewController()
+        let viewModel = NewsViewModel()
+        return NewsViewController(newsViewModel: viewModel)
     }
     
     func makeProfileViewController() -> UIViewController {
-        return ProfileViewController()
+        let viewModel = ProfileViewModel()
+        return ProfileViewController(profileViewModel: viewModel)
     }
     
     func makeWeatherViewController() -> UIViewController {
-        return WeatherViewController()
+        let viewModel = WeatherViewModel()
+        return WeatherViewController(weatherViewModel: viewModel)
     }
 }
