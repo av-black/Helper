@@ -8,8 +8,12 @@
 import UIKit
 
 final class AppCoordinator {
+    // MARK: - Private properties
+    
     private let tabBarController: UITabBarController
     private let modulesFactory: ModulesFactory
+    
+    // MARK: - Init
     
     init(
         tabBarController: UITabBarController,
@@ -19,22 +23,37 @@ final class AppCoordinator {
         self.modulesFactory = modulesFactory
     }
     
+    // MARK: - Public methods
+    
     func start() {
-        let mapViewController = modulesFactory.makeMapViewController()
-        let newsViewController = modulesFactory.makeNewsViewController()
-        let profileViewController = modulesFactory.makeProfileViewController()
-        let weatherViewController = modulesFactory.makeWeatherViewController()
+        var navigationControllers = [UINavigationController]()
         
-        let mapNavigationController = UINavigationController(rootViewController: mapViewController)
-        let newsNavigationController = UINavigationController(rootViewController: newsViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
-        let weatherNavigationController = UINavigationController(rootViewController: weatherViewController)
+        Tabs.allCases.forEach { tab in
+            let viewController: UIViewController
+            let navigationController: UINavigationController
+            
+            switch tab {
+            case .news:
+                viewController = modulesFactory.makeNewsViewController()
+            case .map:
+                viewController = modulesFactory.makeMapViewController()
+            case .weather:
+                viewController = modulesFactory.makeWeatherViewController()
+            case .profile:
+                viewController = modulesFactory.makeProfileViewController()
+            }
+            
+            navigationController = UINavigationController(rootViewController: viewController)
+            navigationController.tabBarItem = UITabBarItem(
+                title: tab.rawValue,
+                image: tab.image,
+                tag: tab.hashValue
+            )
+            navigationControllers.append(navigationController)
+        }
         
-        tabBarController.viewControllers = [
-            mapNavigationController,
-            newsNavigationController,
-            profileNavigationController,
-            weatherNavigationController
-        ]
+        tabBarController.viewControllers = navigationControllers
+        tabBarController.tabBar.tintColor = UIColor.systemCyan
+        tabBarController.tabBar.unselectedItemTintColor = UIColor.secondaryLabel
     }
 }
