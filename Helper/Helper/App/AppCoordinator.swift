@@ -8,8 +8,12 @@
 import UIKit
 
 final class AppCoordinator {
+    // MARK: - Private properties
+    
     private let tabBarController: UITabBarController
     private let modulesFactory: ModulesFactory
+    
+    // MARK: - Init
     
     init(
         tabBarController: UITabBarController,
@@ -18,6 +22,8 @@ final class AppCoordinator {
         self.tabBarController = tabBarController
         self.modulesFactory = modulesFactory
     }
+    
+    // MARK: - Public methods
     
     func start() {
         let mapViewController = modulesFactory.makeMapViewController()
@@ -30,11 +36,54 @@ final class AppCoordinator {
         let profileNavigationController = UINavigationController(rootViewController: profileViewController)
         let weatherNavigationController = UINavigationController(rootViewController: weatherViewController)
         
+        configureTabBarItems(
+            news: newsNavigationController,
+            map: mapNavigationController,
+            weather: weatherNavigationController,
+            profile: profileNavigationController
+        )
+        
         tabBarController.viewControllers = [
-            mapNavigationController,
             newsNavigationController,
-            profileNavigationController,
-            weatherNavigationController
+            mapNavigationController,
+            weatherNavigationController,
+            profileNavigationController
         ]
+    }
+    
+    // MARK: - Private methods
+    
+    private func configureTabBarItems(
+        news: UINavigationController,
+        map: UINavigationController,
+        weather: UINavigationController,
+        profile: UINavigationController
+    ) {
+        news.tabBarItem = UITabBarItem(
+            title: "Новости",
+            image: TabBarIcon.news,
+            tag: 0
+        )
+        
+        map.tabBarItem = UITabBarItem(
+            title: "Карта",
+            image: TabBarIcon.map,
+            tag: 1
+        )
+        
+        weather.tabBarItem = UITabBarItem(
+            title: "Погода",
+            image: TabBarIcon.weather,
+            tag: 2
+        )
+        
+        profile.tabBarItem = UITabBarItem(
+            title: "Профиль",
+            image: TabBarIcon.profile,
+            tag: 3
+        )
+        
+        tabBarController.tabBar.tintColor = UIColor.systemCyan
+        tabBarController.tabBar.unselectedItemTintColor = UIColor.secondaryLabel
     }
 }
