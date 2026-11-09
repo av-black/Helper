@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import MapKit
+import SnapKit
 
 final class MapViewController: UIViewController {
     // MARK: - Private Properties
     
     private let mapViewModel: MapViewModelProtocol
+    private let mapView = MKMapView()
     
     // MARK: - Init
     
@@ -28,5 +31,17 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupMapView()
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupMapView() {
+        view.addSubview(mapView)
+        
+        mapView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
