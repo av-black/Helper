@@ -40,8 +40,8 @@ final class MapViewController: UIViewController {
         view.addSubview(mapView)
         
         mapView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
+            
         }
     }
 }
